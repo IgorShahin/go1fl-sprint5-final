@@ -22,7 +22,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	data := strings.Split(datastring, ",")
 
 	if len(data) != 3 {
-		return errors.New("неверный формат данных тренировки")
+		return errors.New("invalid workout data format")
 	}
 
 	steps, err := strconv.Atoi(data[0])
@@ -31,7 +31,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	}
 
 	if steps <= 0 {
-		return errors.New("количество шагов должно быть больше нуля")
+		return errors.New("number of steps must be greater than zero")
 	}
 
 	duration, err := time.ParseDuration(data[2])
@@ -40,7 +40,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	}
 
 	if duration <= 0 {
-		return errors.New("продолжительность должна быть больше нуля")
+		return errors.New("duration must be greater than zero")
 	}
 
 	t.Steps = steps
@@ -73,7 +73,7 @@ func (t Training) ActionInfo() (string, error) {
 			t.Duration,
 		)
 	default:
-		return "", errors.New("неизвестный тип тренировки")
+		return "", errors.New("unknown workout type")
 	}
 
 	if err != nil {

@@ -19,7 +19,7 @@ type DaySteps struct {
 func (ds *DaySteps) Parse(datastring string) (err error) {
 	slicesData := strings.Split(datastring, ",")
 	if len(slicesData) != 2 {
-		return fmt.Errorf("ожидалось 2 элемента, получено: %d", len(slicesData))
+		return fmt.Errorf("expected 2 elements, got: %d", len(slicesData))
 	}
 
 	steps, err := strconv.Atoi(slicesData[0])
@@ -28,7 +28,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	}
 
 	if steps <= 0 {
-		return fmt.Errorf("некорректное количество шагов: %d", steps)
+		return fmt.Errorf("invalid number of steps: %d", steps)
 	}
 
 	timeData, err := time.ParseDuration(slicesData[1])
@@ -37,7 +37,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	}
 
 	if timeData <= 0 {
-		return fmt.Errorf("некорректная продолжительность: %s", timeData)
+		return fmt.Errorf("invalid duration: %s", timeData)
 	}
 
 	ds.Steps = steps
